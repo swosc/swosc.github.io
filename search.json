@@ -1,0 +1,65 @@
+[
+  {
+    "objectID": "blog.html",
+    "href": "blog.html",
+    "title": "Presentations",
+    "section": "",
+    "text": "Crafting your website with Quarto and GitHub\n\n\n\n\n\n\n\nmiscelllaneous\n\n\n\n\n\n\n\n\n\n\n\nSep 8, 2023\n\n\nLucas Godoy\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Student Workshop Series on Computing",
+    "section": "",
+    "text": "Series of talks and workshops from students to students."
+  },
+  {
+    "objectID": "posts/quarto-website/index.html",
+    "href": "posts/quarto-website/index.html",
+    "title": "Crafting your website with Quarto and GitHub",
+    "section": "",
+    "text": "pwd lists current directory;\nls lists directory content. For example, run ls my-dir to know what is inside the directory called my-dir.\ncd stands for change directory. To navigate to a directory, use: cd   &lt;path-to-directory&gt;;\nmv Moves or renames files. Usage: mv &lt;old-name/location&gt; &lt;new-name/location&gt;;"
+  },
+  {
+    "objectID": "posts/quarto-website/index.html#terminal-basics",
+    "href": "posts/quarto-website/index.html#terminal-basics",
+    "title": "Crafting your website with Quarto and GitHub",
+    "section": "",
+    "text": "pwd lists current directory;\nls lists directory content. For example, run ls my-dir to know what is inside the directory called my-dir.\ncd stands for change directory. To navigate to a directory, use: cd   &lt;path-to-directory&gt;;\nmv Moves or renames files. Usage: mv &lt;old-name/location&gt; &lt;new-name/location&gt;;"
+  },
+  {
+    "objectID": "posts/quarto-website/index.html#pre-requisites",
+    "href": "posts/quarto-website/index.html#pre-requisites",
+    "title": "Crafting your website with Quarto and GitHub",
+    "section": "Pre-requisites",
+    "text": "Pre-requisites\nWe assume you have:\n\nQuarto installed on your labtop;\nA GitHub account;\nA terminal available (Windows users, see this)."
+  },
+  {
+    "objectID": "posts/quarto-website/index.html#step-1-create-a-repo",
+    "href": "posts/quarto-website/index.html#step-1-create-a-repo",
+    "title": "Crafting your website with Quarto and GitHub",
+    "section": "Step 1: create a repo",
+    "text": "Step 1: create a repo\nIn this workshop, we assume you are creating a personal web page. GitHub allows you to host a personal website for free under the domain &lt;username&gt;.github.io. To use this domain, we first need to create a GitHub repository named like that. For example, in this talk we will create a website for a user called statcomp-org, see the image below:"
+  },
+  {
+    "objectID": "posts/quarto-website/index.html#step-2-using-our-quarto-template",
+    "href": "posts/quarto-website/index.html#step-2-using-our-quarto-template",
+    "title": "Crafting your website with Quarto and GitHub",
+    "section": "Step 2: Using our quarto template",
+    "text": "Step 2: Using our quarto template\nOpen a terminal window and navigate to a directory where you want to keep your website. On my laptop, I have a directory (or folder) called git-projects where I store all the git repos I work with. The following code chunk creates a directory to store your website locally and navigates to it.\n\nmkdir &lt;your-username&gt;.github.io\ncd &lt;your-username&gt;.github.io\n\nNow, we obtain a template running the following command:\n\nquarto use template swosc/quarto-template\n\nYou will be asked the following questions. Type “Y” and enter and “.” and enter, respectively.\n\nQuarto templates may execute code when documents are rendered. If you do not \ntrust the authors of the template, we recommend that you do not install or \nuse the template.\n? Do you trust the authors of this template (Y/n) › Y\n? Directory name: › .\n\n\n\n\n\n\n\nImportant\n\n\n\nWhen running the command below, we are assuming your current “working directory” in the terminal is the directory where you are going to keep your website. Run pwd, to make sure you are working on the right directory.\n\n\nLet us use ls to track the files that were generated in our directory:\n\nls\nLICENSE.md Makefile _quarto.yml apa-cv.csl blog.qmd  index.qmd  lua-refs.lua posts  profile.jpg  pubs.bib     styles.css\n\n\n\n\n\n\n\nTip\n\n\n\nAlways avoid creating filenames with special charaters or spaces.\n\n\nThe structure of the folder is as follows: {m . ├── LICENSE.md ├── Makefile ├── _quarto.yml ├── apa-cv.csl ├── blog.qmd ├── github │   └── workflows │       └── publish.yml ├── gitignore ├── index.qmd ├── lua-refs.lua ├── posts │   ├── _metadata.yml │   ├── post-with-code │   │   ├── image.jpg │   │   └── index.qmd │   └── welcome │       ├── index.qmd │       └── thumbnail.jpg ├── profile.jpg ├── pubs.bib └── styles.css See below a description on what each of those files are:\n\nLICENSE.md contains the license for your website repo. Currently, the license in the template is a CC-BY license. That is, anyone is free to share and adapt, must give appropriate credit. You can use the usethis package to change this license. See this link for thurther info.\nMakefile will only be used if you wish to include a page in the website with your publications. If that’s the case, you should include your publications (in BibTeX format) in the pubs.bib file. Moreover, to highlight your name in the authorships, replace Hernandez, K. with your name within the Makefile. See the Figure below for a reference.\n\n\n\n_quarto.yml is perhaps the most important file we will keep. It will give instructions on how to design the website (more on this later).\napa-cv.csl is a helper that controls the templates of the publications list that may be generated using the Makefile.\nblog.md is the file that will control how your “blog” page looks like.\ngithub is a folder that we need to rename to .github. It will help GitHub to publish your website online.\ngitignore rename to .gitignore. This file will store the name of the files you do not want to push to GitHub.\nindex.qmd is the landing page of your website.\nlua-refs.lua is a lua script that will be used to generate your publications list (optional).\nposts/ is a folder containing your posts and some metadata (optional, only if you want to blog as well)\n\nThe _metadata.yml contains some information on how to deal with your posts. In particular, it will tell GitHub avoid compiling them (we will compile the posts locally)\nEach subfolder represents a blog post. Within the blogpost folder, we need a index.qmd file (more on this later).\n\nprofile.jpg replace this with your profile picture.\npubs.bibs (optional) input your publications in BibTeX here.\nstyles.css allows for further customization of the website."
+  },
+  {
+    "objectID": "posts/quarto-website/index.html#step-3-setting-up-git-repo",
+    "href": "posts/quarto-website/index.html#step-3-setting-up-git-repo",
+    "title": "Crafting your website with Quarto and GitHub",
+    "section": "Step 3: setting up git repo",
+    "text": "Step 3: setting up git repo\nThe next step is to setup the git repo. Before doing so, let’s rename the .github and .gitignore files. This is achieved by running:\n\nmv github .github\nmv gitignore .gitignore\n\nNow, let’s set the git repo and push the gitignore file to the remote repo.\n\ngit init\ngit add .gitignore\ngit commit -m \"commiting gitignore\"\ngit branch -M main\ngit remote add origin git@github.com:&lt;your-username&gt;/&lt;your-username&gt;.github.io\ngit push -u origin main\n\nIf you want to get a grasp of how the website is looking like, run:\n\nquarto preview"
+  },
+  {
+    "objectID": "posts/quarto-website/index.html#step-4-lets-customize-our-website",
+    "href": "posts/quarto-website/index.html#step-4-lets-customize-our-website",
+    "title": "Crafting your website with Quarto and GitHub",
+    "section": "Step 4: Let’s customize our website!",
+    "text": "Step 4: Let’s customize our website!\nFirst, we will customize the index.qmd file."
+  }
+]
