@@ -255,8 +255,10 @@ Publishing the website will be one of the easiest parts. We will use GitHub
 Actions (GA) and GitHub pages.
 
 Basically, all you have to do is to go to your repository on GitHub, click on
-    `Settings > Pages`. Next, under **Build and Deployment**, click on **Deploy
-    from branch** and select **GitHub Actions**.
+`Settings > Pages`.  Next, under **Build and Deployment**, click on **Deploy
+from branch** and select **GitHub Actions**. Next, you should create a new
+`branch` called `gh-pages`. To do so, click on `main`, and then on `View all
+branches`. Next, `create new branch`. Name the new branch as `gh-pages`.
     
 Now, every time you `push` your changes to github, the website will be deployed
 (published) at `<your-username>.github.io`.
