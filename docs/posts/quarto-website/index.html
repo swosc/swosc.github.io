@@ -200,6 +200,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#step-2-using-our-quarto-template" id="toc-step-2-using-our-quarto-template" class="nav-link" data-scroll-target="#step-2-using-our-quarto-template">Step 2: Using our quarto template</a></li>
   <li><a href="#step-3-setting-up-git-repo" id="toc-step-3-setting-up-git-repo" class="nav-link" data-scroll-target="#step-3-setting-up-git-repo">Step 3: setting up git repo</a></li>
   <li><a href="#step-4-lets-customize-our-website" id="toc-step-4-lets-customize-our-website" class="nav-link" data-scroll-target="#step-4-lets-customize-our-website">Step 4: Let’s customize our website!</a></li>
+  <li><a href="#step-4-publishing" id="toc-step-4-publishing" class="nav-link" data-scroll-target="#step-4-publishing">Step 4: Publishing</a></li>
+  <li><a href="#further-resources-explore" id="toc-further-resources-explore" class="nav-link" data-scroll-target="#further-resources-explore">Further resources (explore)</a></li>
   </ul>
 </nav>
     </div>
@@ -224,6 +226,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ol type="1">
 <li><a href="https://quarto.org/"><code>Quarto</code></a> installed on your labtop;</li>
 <li>A <a href="https://github.com/">GitHub</a> account;</li>
+<li>We also assume you are able to connect to GitHub using SSH keys. For more details, see <a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh">this</a></li>
 <li>A <code>terminal</code> available (Windows users, see <a href="https://learn.microsoft.com/en-us/windows/terminal/install">this</a>).</li>
 </ol>
 </section>
@@ -283,29 +286,30 @@ Tip
 </div>
 </div>
 <p>The structure of the folder is as follows:</p>
-<pre class="{m"><code>.
-├── LICENSE.md
-├── Makefile
-├── _quarto.yml
-├── apa-cv.csl
-├── blog.qmd
-├── github
-│&nbsp;&nbsp; └── workflows
-│&nbsp;&nbsp;     └── publish.yml
-├── gitignore
-├── index.qmd
-├── lua-refs.lua
-├── posts
-│&nbsp;&nbsp; ├── _metadata.yml
-│&nbsp;&nbsp; ├── post-with-code
-│&nbsp;&nbsp; │&nbsp;&nbsp; ├── image.jpg
-│&nbsp;&nbsp; │&nbsp;&nbsp; └── index.qmd
-│&nbsp;&nbsp; └── welcome
-│&nbsp;&nbsp;     ├── index.qmd
-│&nbsp;&nbsp;     └── thumbnail.jpg
-├── profile.jpg
-├── pubs.bib
-└── styles.css</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">.</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> LICENSE.md</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> Makefile</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> _quarto.yml</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> apa-cv.csl</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> blog.qmd</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> github</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> └── workflows</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span>     └── publish.yml</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> gitignore</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> index.qmd</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> lua-refs.lua</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> posts</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── _metadata.yml</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── post-with-code</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> │&nbsp;&nbsp; ├── image.jpg</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> │&nbsp;&nbsp; └── index.qmd</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> └── welcome</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span>     ├── index.qmd</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span>     └── thumbnail.jpg</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> profile.jpg</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> pubs.bib</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a><span class="ex">└──</span> styles.css</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>See below a description on what each of those files are:</p>
 <ul>
 <li><p><code>LICENSE.md</code> contains the license for your website repo. Currently, the license in the template is a <a href="https://creativecommons.org/licenses/by/4.0/">CC-BY</a> license. That is, anyone is free to share and adapt, must give appropriate credit. You can use the <code>usethis</code> package to change this license. See <a href="https://usethis.r-lib.org/reference/licenses.html">this link</a> for thurther info.</p></li>
@@ -350,10 +354,79 @@ Tip
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> preview</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You can use <code>quarto preview</code> to visualize the changes anytime you modify something on your quarto website.</p>
+</div>
+</div>
 </section>
 <section id="step-4-lets-customize-our-website" class="level2">
 <h2 class="anchored" data-anchor-id="step-4-lets-customize-our-website">Step 4: Let’s customize our website!</h2>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You may use your preferred <code>IDE</code> to edit <code>.qmd</code> files. Popular choices are <code>Rstudio</code>, <code>VScode</code>, and (not so popular) <code>emacs</code>. For the last two, we advise you to install the appropriate extensions to enjoy all the capabilities of quarto.</p>
+</div>
+</div>
 <p>First, we will customize the <code>index.qmd</code> file.</p>
+<p>At the beginning, the <code>index.qmd</code> file will look like this:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode yml code-with-copy"><code class="sourceCode yaml"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">image</span><span class="kw">:</span><span class="at"> profile.jpg</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">about</span><span class="kw">:</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">template</span><span class="kw">:</span><span class="at"> jolla</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">links</span><span class="kw">:</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">icon</span><span class="kw">:</span><span class="at"> twitter</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">text</span><span class="kw">:</span><span class="at"> Twitter</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">href</span><span class="kw">:</span><span class="at"> https://twitter.com</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">icon</span><span class="kw">:</span><span class="at"> linkedin</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">text</span><span class="kw">:</span><span class="at"> LinkedIn</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">href</span><span class="kw">:</span><span class="at"> https://linkedin.com</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">icon</span><span class="kw">:</span><span class="at"> github</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">text</span><span class="kw">:</span><span class="at"> Github</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">href</span><span class="kw">:</span><span class="at"> https://github.com</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="at">&lt;Write somethign about yourself or your website&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>In general, we want to replace the <code>href</code> field under Twiter, Linkedin, and GitHub with the link to our own accounts. The <code>profile.jpg</code> file can also be changed (or we can just overwrite it).</p>
+<p>There are 5 possible inputs for the <code>template</code> field. They are:</p>
+<ul>
+<li><code>jolla</code> (used in the provided template)</li>
+<li><code>trestles</code></li>
+<li><code>solana</code></li>
+<li><code>marquee</code></li>
+<li><code>broadside</code></li>
+</ul>
+<p>Play around with the different options to figure out which one suits you best.</p>
+<p>Next, we can include more resources to the website as follows…</p>
+</section>
+<section id="step-4-publishing" class="level2">
+<h2 class="anchored" data-anchor-id="step-4-publishing">Step 4: Publishing</h2>
+<p>Publishing the website will be one of the easiest parts. We will use GitHub Actions (GA) and GitHub pages.</p>
+<p>Basically, all you have to do is to go to your repository on GitHub, click on <code>Settings &gt; Pages</code>. Next, under <strong>Build and Deployment</strong>, click on <strong>Deploy from branch</strong> and select <strong>GitHub Actions</strong>. Next, you should create a new <code>branch</code> called <code>gh-pages</code>. To do so, click on <code>main</code>, and then on <code>View all branches</code>. Next, <code>create new branch</code>. Name the new branch as <code>gh-pages</code>.</p>
+<p>Now, every time you <code>push</code> your changes to github, the website will be deployed (published) at <code>&lt;your-username&gt;.github.io</code>.</p>
+</section>
+<section id="further-resources-explore" class="level2">
+<h2 class="anchored" data-anchor-id="further-resources-explore">Further resources (explore)</h2>
+<ul>
+<li><a href="https://quarto.org/docs/guide/">Quarto website</a> provides a bunch of resources;</li>
+</ul>
 
 
 </section>

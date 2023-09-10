@@ -4,6 +4,7 @@ author: "Lucas Godoy"
 date: "2023-09-08"
 categories: [miscelllaneous]
 engine: knitr
+freeze: false
 ---
 
 ## Terminal basics
@@ -194,14 +195,14 @@ If you want to get a grasp of how the website is looking like, run:
 quarto preview
 ```
 
-::: {.callout-info}
+::: {.callout-note}
 You can use `quarto preview ` to visualize the changes anytime you modify
 something on your quarto website.
 :::
 
 ## Step 4: Let's customize our website!
 
-::: {.callout-info}
+::: {.callout-note}
 You may use your preferred `IDE` to edit `.qmd` files. Popular choices are
 `Rstudio`, `VScode`, and (not so popular) `emacs`. For the last two, we advise
 you to install the appropriate extensions to enjoy all the capabilities of
