@@ -1,7 +1,7 @@
 ---
 title: "Crafting your website with Quarto and GitHub"
 author: "Lucas Godoy"
-date: "2023-09-08"
+date: "2023-09-14"
 categories: [miscelllaneous]
 engine: knitr
 freeze: false
@@ -35,18 +35,20 @@ We assume you have:
 
 In this workshop, we assume you are creating a personal web page. GitHub allows
 you to host a personal website for free under the domain
-`<username>.github.io`. To use this domain, we first need to create a GitHub
-repository named like that. For example, in this talk we will create a website
-for a user called `statcomp-org`, see the image below: 
+`<username>.github.io`. We first need to create a GitHub repository named like
+that. For example, in this talk, we will create a website for a user called
+`statcomp-org` (see @fig-create-repo).
 
-![](create-repo.png)
+![Screenshot of the page where repos are
+created](create-repo.png){#fig-create-repo}
 
 ## Step 2: Using our quarto template
 
 Open a terminal window and navigate to a directory where you want to keep your
 website. On my laptop, I have a directory (or folder) called `git-projects`
 where I store all the `git` repos I work with. The following code chunk creates
-a directory to store your website locally and navigates to it.
+a directory to store the files we will use to create your website locally and
+navigates to it.
 
 ```{bash}
 #| eval: false
@@ -61,8 +63,8 @@ Now, we obtain a template running the following command:
 quarto use template swosc/quarto-template
 ```
 
-You will be asked the following questions. Type "Y" and enter and "." and enter,
-respectively.
+You will be asked the following questions. Type "Y" and the key "enter" and "."
+and the key "enter", respectively.
 
 ```{bash}
 #| eval: false
@@ -83,7 +85,10 @@ Let us use `ls` to track the files that were generated in our directory:
 ```{bash}
 #| eval: false
 ls
-LICENSE.md Makefile _quarto.yml apa-cv.csl blog.qmd  index.qmd  lua-refs.lua posts  profile.jpg  pubs.bib     styles.css
+LICENSE.md         blog.qmd           highlight-author.R profile.jpg
+Makefile           custom.scss        index.qmd          pubs.bib
+_quarto.yml        github             lua-refs.lua       styles.css
+apa-cv.csl         gitignore          posts
 ```
 
 ::: {.callout-tip}
@@ -91,18 +96,21 @@ Always avoid creating filenames with special charaters or spaces.
 :::
 
 The structure of the folder is as follows:
-```bash
+```{bash}
 #| eval: false
+
 .
 ├── LICENSE.md
 ├── Makefile
 ├── _quarto.yml
 ├── apa-cv.csl
 ├── blog.qmd
+├── custom.scss
 ├── github
 │   └── workflows
 │       └── publish.yml
 ├── gitignore
+├── highlight-author.R
 ├── index.qmd
 ├── lua-refs.lua
 ├── posts
@@ -116,6 +124,8 @@ The structure of the folder is as follows:
 ├── profile.jpg
 ├── pubs.bib
 └── styles.css
+
+6 directories, 19 files
 ```
 See below a description on what each of those files are:
 
@@ -127,12 +137,7 @@ See below a description on what each of those files are:
   link](https://usethis.r-lib.org/reference/licenses.html) for thurther info.
 
 - `Makefile` will only be used if you wish to include a page in the website with
-  your publications. If that's the case, you should include your publications
-  (in `BibTeX` format) in the `pubs.bib` file. Moreover, to highlight your name
-  in the authorships, replace `Hernandez, K.` with your name within the
-      `Makefile`. See the Figure below for a reference.
-
-![](makefile.png)
+  your publications. 
 
 - `_quarto.yml` is perhaps the most important file we will keep. It will give
   instructions on how to design the website (more on this later).
@@ -142,11 +147,16 @@ See below a description on what each of those files are:
   
 - `blog.md` is the file that will control how your "blog" page looks like.
 
+- `custom.scss` helps to further customize the website.
+
 - `github` is a folder that we need to rename to `.github`. It will help GitHub
   to publish your website online.
 
 - `gitignore` rename to `.gitignore`. This file will store the name of the files
   you do not want to push to GitHub.
+
+- `highlight-author.R` is a helper `R` script intended to help with the creation
+  of a opublications' list (optional).
 
 - `index.qmd` is the landing page of your website.
 
@@ -200,7 +210,7 @@ You can use `quarto preview ` to visualize the changes anytime you modify
 something on your quarto website.
 :::
 
-## Step 4: Let's customize our website!
+## Step 4: Let's taylor our website!
 
 ::: {.callout-note}
 You may use your preferred `IDE` to edit `.qmd` files. Popular choices are
@@ -213,7 +223,6 @@ First, we will customize the `index.qmd` file.
 
 At the beginning, the `index.qmd` file will look like this:
 ```yml
-#| eval: false
 ---
 image: profile.jpg
 about:
@@ -248,7 +257,350 @@ There are 5 possible inputs for the `template` field. They are:
 
 Play around with the different options to figure out which one suits you best.
 
-Next, we can include more resources to the website as follows...
+We can include more pages and resources to our website by adding new `.qmd` (or
+even `.pdf`) files to it and editing the `_quarto.yml` file.
+
+For example, assume we want to include our CV as a `.pdf` file.  First, we copy
+our `.pdf` file into the directory where our _website project_ is located, let's
+say we named it `cv.pdf`. Next, we add the following to our `_quarto.yml` file.
+
+```yml
+---
+project:
+  type: website
+  output-dir: docs
+  render:
+    - "*.qmd"
+
+website:
+  title: "How do you wanna call your website?"
+  search: true
+  cookie-consent: false
+  twitter-card: true
+  open-graph: true
+  site-url: https://<yourwebsite>.github.io
+  navbar:
+    right:
+      - blog.qmd
+      - text: "How do I wanna call my CV"
+        href: cv.pdf
+      - icon: github
+        href: https://github.com/
+      - icon: twitter
+        href: https://twitter.com
+  page-footer: 
+    left: "You can write somethig here too."
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+---
+
+```
+
+Adding a new `.qmd` file is even simpler. We do not need the `text` and `href`
+parameters.  First, create a `.qmd` file. Let us call it `my-new-qmd.qmd`. The "body"
+of the file can be anything you want, but the header should have (at least) a
+title. The title will tell how this file will appear in the `navbar`.
+```yml
+---
+title: "My new `.qmd` file"
+---
+
+```
+
+To add `my-new-qmd.qmd` to the navbar, edit the `_quarto.yml` as follows:
+
+```yml
+---
+project:
+  type: website
+  output-dir: docs
+  render:
+    - "*.qmd"
+
+website:
+  title: "How do you wanna call your website?"
+  search: true
+  cookie-consent: false
+  twitter-card: true
+  open-graph: true
+  site-url: https://<yourwebsite>.github.io
+  navbar:
+    right:
+      - blog.qmd
+      - text: "How do I wanna call my CV"
+        href: cv.pdf
+      - my-new-qmd.qmd
+      - icon: github
+        href: https://github.com/
+      - icon: twitter
+        href: https://twitter.com
+  page-footer: 
+    left: "You can write somethig here too."
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+---
+
+```
+
+We can further customize the navbar. For example, we can move the `twitter` and
+`github` icons to the right and everything else to the left.
+
+```yml
+---
+project:
+  type: website
+  output-dir: docs
+  render:
+    - "*.qmd"
+
+website:
+  title: "How do you wanna call your website?"
+  search: true
+  cookie-consent: false
+  twitter-card: true
+  open-graph: true
+  site-url: https://<yourwebsite>.github.io
+  navbar:
+    left:
+      - blog.qmd
+      - text: "How do I wanna call my CV"
+        href: cv.pdf
+        - my-new-qmd.qmd
+    right:
+      - icon: github
+        href: https://github.com/
+      - icon: twitter
+        href: https://twitter.com
+  page-footer: 
+    left: "You can write somethig here too."
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+---
+
+```
+
+We can easily change the way our website look by changing the `theme` parameter
+under `format` and `html`. To get a list of the 25 themes available, take a look
+at [this link](https://quarto.org/docs/output-formats/html-themes.html).
+
+Alternatively, we can change the colors of a theme using a `scss` (or `css`
+file). For instance, let's add the university colors to the `cosmo`
+theme. First, create a file called `custom.scss` in the root directory of our
+website. Next, add the following lines to the file
+
+```scss
+#| eval: false
+/*-- scss:defaults --*/
+         
+$primary:       #000E2F !default;
+$secondary:     #E4002B !default;
+```
+
+::: {.callout-important}
+It is important to include the `/*-- scss:defaults --*/` to the `custom.scss`
+file. Otherwise, the changes will not be applied.
+:::
+
+Finally, we rewrite our `_quarto.yml` file as follows:
+
+```yml
+---
+project:
+  type: website
+  output-dir: docs
+  render:
+    - "*.qmd"
+
+website:
+  title: "How do you wanna call your website?"
+  search: true
+  cookie-consent: false
+  twitter-card: true
+  open-graph: true
+  site-url: https://<yourwebsite>.github.io
+  navbar:
+    left:
+      - blog.qmd
+      - text: "How do I wanna call my CV"
+        href: cv.pdf
+        - my-new-qmd.qmd
+    right:
+      - icon: github
+        href: https://github.com/
+      - icon: twitter
+        href: https://twitter.com
+  page-footer: 
+    left: "You can write somethig here too."
+
+format:
+  html:
+    theme:
+      - cosmo
+      - custom.scss
+    css: styles.css
+---
+
+```
+
+We can also import google fonts into our website.  To test it, let's change the
+font to Ubuntu. First, we use the [Google Font](https://fonts.google.com/) API
+to import the desired font (for further details see
+[this](https://ucsb-meds.github.io/customizing-quarto-websites/#/select-fonts)).
+
+```scss
+#| eval: false
+/*-- scss:defaults --*/
+
+// colors
+$primary:       #000E2F !default;
+$secondary:     #E4002B !default;
+
+// fonts
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+```
+
+Next, we update, once again, the `_quarto.yml` file.
+
+```yml
+---
+project:
+  type: website
+  output-dir: docs
+  render:
+    - "*.qmd"
+
+website:
+  title: "How do you wanna call your website?"
+  search: true
+  cookie-consent: false
+  twitter-card: true
+  open-graph: true
+  site-url: https://<yourwebsite>.github.io
+  navbar:
+    left:
+      - blog.qmd
+      - text: "How do I wanna call my CV"
+        href: cv.pdf
+        - my-new-qmd.qmd
+    right:
+      - icon: github
+        href: https://github.com/
+      - icon: twitter
+        href: https://twitter.com
+  page-footer: 
+    left: "You can write somethig here too."
+
+format:
+  html:
+    theme:
+      - cosmo
+      - custom.scss
+    mainfont: Ubuntu
+    css: styles.css
+---
+
+```
+
+::: {.callout-tip}
+The possibilities of customization are **endless**! 
+My advice is to keep it simple.
+:::
+
+### Bonus
+
+If you have your publications in a `.bib` file, we can use some `lua` and `R` to
+get a tab with your publications working. If you have no idea about what
+`BibTeX` is, take a look at [this
+link](https://www.overleaf.com/learn/latex/Bibliography_management_with_bibtex).
+
+_Kalu_ (@fig-kalu) has her publications information in a file called
+`pubs.bib`. She has published one paper as a first author and another one as a
+co-author, collaborating with Cacau (@fig-cacau).
+
+::: {#fig-animals layout-ncol=2} 
+
+![Kalu](kalu.jpg){#fig-kalu}
+
+![Cacau](cacau.jpg){#fig-cacau}
+
+Some of my pets.
+:::
+
+See below how her `pubs.bib` file looks like
+```bibtex
+@article{hernandes2023meowmazing,
+  title =        {Meowmazing paper I wrote},
+  author =       {Kalu Hernandez},
+  journal =      {Meow journal},
+  number =       000,
+  pages =        {0--0},
+  year =         2023,
+  publisher =    {Crazy cats dot com}
+}
+
+@article{godoy2022growlmazing,
+  title =        {Growlmazing paper we wrote},
+  author =       {Cacau Godoy, Kalu Hernandez},
+  journal =      {Meow journal},
+  number =       000,
+  pages =        {0--0},
+  year =         2023,
+  publisher =    {Dogs and cats getting along}
+}
+```
+
+To transform this `pubs.bib` into a `.qmd` file, we will use `make` (for more
+details see
+[this](https://www.gnu.org/software/make/manual/html_node/Introduction.html)). There
+are some helper files in our directory, they are `Makefile`, `apa-cv.csv`
+(citation style file), `highlight-author.R`, and `lua-refs.lua`.
+The `Makefile` looks as follows:
+
+```bash
+all: publications
+	@quarto render
+
+publications: pubs.bib apa-cv.csl lua-refs.lua
+	@quarto pandoc -L lua-refs.lua \
+		pubs.bib --csl=apa-cv.csl \
+		-V --toc=false \
+		--to=markdown-citations \
+		-o publications.qmd
+	@Rscript highlight-author.R \
+		"Hernandez, K." "publications.qmd"
+
+clean:
+	rm -rf publications* *~
+```
+
+It uses the `lua-refs.lua` script to create a `publications.qmd` file based on
+`pubs.bib`. Next, it uses R to highlight a selected author.
+
+::: {.callout-important}
+To make it work with your `.bib` file, you need to populate `pubs.bib` with your
+publications or include another `.bib` file in the directory. If that's the
+case, replace `pubs.bib` by `<your-file>.bib` in the `Makefile`. Make sure you
+also changes `Hernandez, K.` in the `Makefile` to the way your name appears in
+the references.
+:::
+
+Now, we run:
+```bash
+#| eval: false
+make publications
+```
+
+and it will generate a `publications.qmd` file. Now we only need to tell our
+`_quarto.yml` how to "find" this new file.
 
 ## Step 4: Publishing
 
@@ -256,15 +608,35 @@ Publishing the website will be one of the easiest parts. We will use GitHub
 Actions (GA) and GitHub pages.
 
 Basically, all you have to do is to go to your repository on GitHub, click on
-`Settings > Pages`.  Next, under **Build and Deployment**, click on **Deploy
-from branch** and select **GitHub Actions**. Next, you should create a new
-`branch` called `gh-pages`. To do so, click on `main`, and then on `View all
-branches`. Next, `create new branch`. Name the new branch as `gh-pages`.
+`Settings > Pages`.  Next, under **Build and Deployment**, set **Deploy from a
+branch**, and, under **Branch**, select `main` and `/docs`. 
+
+![](gh-pages.png)
+
+Next, you should create a new `branch` called `gh-pages`. To do so, click on
+`main`, and then on `View all branches`. Next, `create new branch`. Name the new
+branch as `gh-pages`.
     
 Now, every time you `push` your changes to github, the website will be deployed
 (published) at `<your-username>.github.io`.
+
+## Closing comments
+
+Creating a website is a fun task that may take a lot of your time if you are too
+attached to details, be mindful. The best way to move forward, is being **good
+at _Googling_** and paying attention to the **error messages** (do never dismiss
+them!).
+
+There are many resources online teaching you how to customize your documents,
+write reports, and so on in `Quarto`. If you want to do something different, is
+very likely that someone has already done that. So, once again, always search
+the web thoroughly to avoid "reinventing the wheel".
 
 ## Further resources (explore)
 
 * [Quarto website](https://quarto.org/docs/guide/) provides a bunch of
   resources;
+
+* [Customizing Quarto
+  Websites](https://ucsb-meds.github.io/customizing-quarto-websites/) talk, by
+  [Sam Csik](https://samanthacsik.github.io/);
