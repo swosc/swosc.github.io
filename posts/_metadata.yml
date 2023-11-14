@@ -10,3 +10,7 @@ title-block-banner: true
 engine: knitr
 toc: true
 highlight-style: a11y
+code-fold: show
+code-tools: true
+anchor-sections: true
+link-external-newwindow: true

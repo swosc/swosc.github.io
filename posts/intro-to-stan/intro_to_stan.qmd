@@ -1,19 +1,11 @@
 ---
 title: "Getting to know Stan - SWOSC"
 author: "Ben Stockton"
-date: 11-16-2023
-format: 
-    html:
-        code-fold: show
-        code-tools: true
-        toc: true
-        toc-location: left
-        anchor-sections: true
-        link-external-newwindow: true
-        citations-hover: true
-        results: hold
-editor: visual
+date: "2023-11-16"
+results: hold
 bibliography: swosc-stan.bib
+categories: [bayesian inference]
+freeze: true
 ---
 
 ## Installation

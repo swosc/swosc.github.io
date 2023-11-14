@@ -2,6 +2,7 @@
   {
     "listing": "/blog.html",
     "items": [
+      "/posts/intro-to-stan/intro_to_stan.html",
       "/posts/quarto-website/index.html"
     ]
   }
