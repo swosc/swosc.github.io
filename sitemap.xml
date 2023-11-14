@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://github.com/swosc/swosc.github.io/posts/quarto-website/index.html</loc>
+    <lastmod>2023-11-14T22:41:48.177Z</lastmod>
+  </url>
+  <url>
     <loc>https://github.com/swosc/swosc.github.io/blog.html</loc>
-    <lastmod>2023-09-15T14:33:37.319Z</lastmod>
+    <lastmod>2023-11-14T22:41:44.561Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/swosc/swosc.github.io/index.html</loc>
-    <lastmod>2023-09-15T14:33:33.010Z</lastmod>
+    <lastmod>2023-11-14T22:41:43.889Z</lastmod>
   </url>
   <url>
-    <loc>https://github.com/swosc/swosc.github.io/posts/quarto-website/index.html</loc>
-    <lastmod>2023-09-15T14:33:35.591Z</lastmod>
+    <loc>https://github.com/swosc/swosc.github.io/posts/intro-to-stan/intro_to_stan.html</loc>
+    <lastmod>2023-11-14T22:41:46.865Z</lastmod>
   </url>
 </urlset>
