@@ -33,7 +33,7 @@ model {
   real sigma = sqrt(sigma2);
   
   beta ~ multi_normal(beta_0_vec, sigma2 * Lambda_0);
-  sigma2 ~ scaled_inv_chi_square(nu_0, s_02);
+  sigma2 ~ scaled_inv_chi_square(nu_0, sqrt(s_02));
   
   y ~ normal(X_mat * beta, sigma);
 }
